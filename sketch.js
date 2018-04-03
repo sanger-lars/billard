@@ -1,4 +1,4 @@
-let b2, bslet, bgale, bOK, bSlet_navne, bNyt_spil;
+let b2, bslet, bgale, bOK, bSlet_navne, bNyt_spil, bUndo;
 let ui_score, ui_tur, ui_antal, bNyt_navn;
 let tavle;
 let cWidth = window.screen.width; //640px
@@ -7,11 +7,14 @@ const topSpace = 60;
 const font_size = 25;
 const sizePlus = 5;
 let aktivPlayer = 1;
+let ap;
 let score = 0;
 let navn = [];
 let AntalDeltagere = 1;
 let antal_spiller_med = AntalDeltagere;
 let er_spillet_igang = false;
+let undo = [];
+let iii;
 
 
 
@@ -66,6 +69,7 @@ class Player {
 		alert ("tillykke "+this.navn+". Du er ude af spillet !");
 		this.faerdig = true;
 		antal_spiller_med = antal_spiller_med -1;
+		undo[iii] = -1;
 	}
 
 	lav_score(scor) {
@@ -74,8 +78,10 @@ class Player {
 			// gale
 			if (this.kryds) {
 				this.score.push(100);
+				undo[ap] = 1;
 			} else {
 				this.score.push(this.sidste_score()+100);
+				undo[iii] = 1;
 			}
 		}
 		else {
@@ -97,13 +103,18 @@ class Player {
 							pp = 0;
 							this.score.push("X");
 							this.kryds = true;
+							undo[iii] = 2;
 						}
 					} 
 					else {
 						this.vinder();
 					}
 				} 
-				else {this.score.push(pp);}
+				else {
+					this.score.push(pp);
+					undo[iii] = 1;
+
+				}
 			}	
 		}}
 	}
@@ -119,13 +130,16 @@ function check_for_felter() {
 		// navne felter
 		if (i == 1) {
 			navn[1] = (new Player(prompt("indtast navn -> "), del));
-			navn[1].skriv_navn();
 			aktivPlayer = 1;
 			
 			ui_score.html(score + "       "+ navn[aktivPlayer].navn);
 		} else {
-			navn[i] = new Player(prompt("indtast navn -> "), del*(2*i-1));
-			navn[i].skriv_navn();		
+			navn[i] = new Player(prompt("indtast navn -> "), del*(2*i-1));		
+		}
+		tegn_tavleFelter();
+		for (i = 1; i <= AntalDeltagere; i++) {
+			navn[i].skriv_navn();
+			navn[i].skriv_point();
 		}
 	}
 }
@@ -227,12 +241,16 @@ function skift_spiller(aktiv) {
 
 
 function knap_OK() {
-	if ((score != 0) && (navn[aktivPlayer].faerdig) != true) {
+	undo = [];
+	ap = aktivPlayer;
+	iii = ap;
+	if ((score != 0) && (navn[aktivPlayer].faerdig != true)) {
 		navn[aktivPlayer].lav_score(score);
 		if (score < 0) {
 			let gode = -score;
 			for (i = 1; i <= AntalDeltagere; i++) {
 				if (i != aktivPlayer) {
+					iii = i;
 					navn[i].lav_score(gode);
 				}
 			}		
@@ -252,6 +270,32 @@ function knap_OK() {
 	}
 
 } // knap_OK
+
+
+function knap_Undo() {
+	console.log(undo);
+	if (!er_spillet_igang) {er_spillet_igang = true;}
+	for (iii = 1; iii < undo.length; iii++) {
+		if (undo[iii] == 1) {navn[iii].score.pop();}
+		else if (undo[iii] == -1) {
+			navn[iii].faerdig = false;
+			antal_spiller_med = antal_spiller_med + 1;
+		}
+		else if (undo[iii] == 2) {
+			navn[iii].kryds = false;
+			navn[iii].score.pop();
+		}
+	}
+	aktivPlayer = ap;
+
+	tegn_tavleFelter();
+	for (i = 1; i <= AntalDeltagere; i++) {
+		navn[i].skriv_navn();
+		navn[i].skriv_point();
+	}
+	score = 0;
+	ui_score.html(score + "       "+ navn[aktivPlayer].navn);
+}
 
 
 function knap_2() {
@@ -322,6 +366,10 @@ function setup() {
 	bgale.style('font-size', '20px');
 	bgale.parent('spil');
 	
+	bUndo = createButton("Undo");
+	bUndo.style('font-size', '20px');
+	bUndo.style('background','red');
+	bUndo.parent('spil');
 	let spil_div = select('#spil');
 	//spil_div.style('left', '20px');
 	//spil_div.style('bottom', '20px');
@@ -331,6 +379,7 @@ function setup() {
 	bslet.mouseClicked(slet);
 	bgale.mouseClicked(knap_gale);
 	bOK.mouseClicked(knap_OK);
+	bUndo.mouseClicked(knap_Undo);
 	ui_antal.changed(lav_extra_navn);
 	bSlet_navne.mouseClicked(slet_navne);
 	bNyt_spil.mouseClicked(slet_scores);
