@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>billard</title>
+
+	<script src="libraries/p5.min.js"></script>
+	<script src="libraries/p5.dom.js"></script>
+	<script src="sketch.js"></script>
+
+	<style>
+		body {
+			margin:10;
+			padding:0;
+		}
+		canvas {
+			background: black;
+			margin: 10px;
+			float: left;
+		}
+		button {
+			margin: 10px;
+		}
+		h1 {
+			padding-left: 20px;
+			padding-bottom: 2px;
+		}
+		#menu {
+			padding-top: 100px;
+		}
+		#spil {
+			 width: 300px;
+			 position: fixed;
+			 top: 250px;
+			 bottom: auto;
+			 right: auto;
+			 left:600px;
+			}
+	</style>
+</head>
+<body>
+	<div id="min_tavle"></div>
+	<div id="menu">
+		<input id="tal" type="number" style="font-size: 40px; width: 60px; text-align: center;">
+	</div>
+	<div id="spil" style="position: fixed;"></div>
+</body>
+</html>
