@@ -1,16 +1,18 @@
 let b2, bslet, bgale, bOK, bSlet_navne, bNyt_spil;
 let ui_score, ui_tur, ui_antal, bNyt_navn;
 let tavle;
-let cWidth = 640;
+let cWidth = window.screen.width; //640px
 let cHeight = 1000;
 const topSpace = 60;
-const font_size = 32;
+const font_size = 25;
+const sizePlus = 5;
 let aktivPlayer = 1;
 let score = 0;
 let navn = [];
 let AntalDeltagere = 1;
 let antal_spiller_med = AntalDeltagere;
 let er_spillet_igang = false;
+
 
 
 class Player {
@@ -23,7 +25,7 @@ class Player {
 	}
 	
 	skriv_navn() {
-		textSize(font_size);
+		textSize(font_size+sizePlus);
 		if (this.faerdig == false) {fill(255);}
 		else {fill(100);}
 		stroke(0);
@@ -120,7 +122,7 @@ function check_for_felter() {
 			navn[1].skriv_navn();
 			aktivPlayer = 1;
 			
-			ui_score.html(score + " "+ navn[aktivPlayer].navn);
+			ui_score.html(score + "       "+ navn[aktivPlayer].navn);
 		} else {
 			navn[i] = new Player(prompt("indtast navn -> "), del*(2*i-1));
 			navn[i].skriv_navn();		
@@ -132,6 +134,7 @@ function check_for_felter() {
 function slet_navne() {
 	navn = [" "];
 	antal_spiller_med = AntalDeltagere;
+	ui_score.html(" ");
 	tegn_tavleFelter();
 }
 
@@ -242,7 +245,7 @@ function knap_OK() {
 	}
 	score = 0;
 	skift_spiller(aktivPlayer);
-	ui_score.html(score + " "+ navn[aktivPlayer].navn);
+	ui_score.html(score + "       "+ navn[aktivPlayer].navn);
 	if (antal_spiller_med == 1) {
 		alert("Spillet er slut. "+navn[aktivPlayer].navn+" har vundet retten til at give en omgang.");
 		er_spillet_igang = false;
@@ -253,19 +256,19 @@ function knap_OK() {
 
 function knap_2() {
 	score = score+2;
-	ui_score.html(score + " "+ navn[aktivPlayer].navn);
+	ui_score.html(score + "       "+ navn[aktivPlayer].navn);
 }
 
 
 function knap_gale() {
 	score = -score;
-	ui_score.html(score + " "+ navn[aktivPlayer].navn);
+	ui_score.html(score + "       "+ navn[aktivPlayer].navn);
 }
 
 
 function slet() {
 	score = 0;
-	ui_score.html(score + " "+ navn[aktivPlayer].navn);
+	ui_score.html(score + "       "+ navn[aktivPlayer].navn);
 }
 
 
@@ -281,38 +284,49 @@ function setup() {
 	let a = createP(' ');
 	a.parent('menu');
 
-	bSlet_navne = createButton("Ny Tavle");
-	bSlet_navne.parent('menu');
-	
 	bNyt_spil = createButton("Nyt Spil");
+	bNyt_spil.size(50);
 	bNyt_spil.parent('menu');
 
+	bSlet_navne = createButton("Ny Tavle");
+	bSlet_navne.style('float','right');
+	bSlet_navne.style('background','red');
+	bSlet_navne.size(50);
+	bSlet_navne.parent('menu');
+
 	ui_score = createElement('H1', " ");
+	ui_score.style('color', 'white');
+	ui_score.style('font-size', '30px');
 	ui_score.parent('spil');
+	a = createP(' ');
+	a.style('font-size', '1px');
+	a.parent('spil');
 	
 	b2 = createButton("2");
-	b2.size(100);
-	b2.style('font-size', '50px');
+	b2.size(75);
+	b2.style('font-size', '30px');
 	b2.parent('spil');
 
 	bOK = createButton("OK");
-	bOK.style('font-size', '50px');
+	bOK.style('font-size', '30px');
 	bOK.parent('spil');
-	
 	a = createP(' ');
+	a.style('font-size', '1px');
 	a.parent('spil');
 
 	bslet = createButton("slet");
-	bslet.style('font-size', '30px');
+	bslet.style('font-size', '20px');
 	bslet.parent('spil');
 	
 	bgale = createButton("GALE");
-	bgale.style('font-size', '30px');
+	bgale.style('font-size', '20px');
 	bgale.parent('spil');
 	
 	let spil_div = select('#spil');
-	spil_div.style('left', cWidth+20+'px');
-
+	//spil_div.style('left', '20px');
+	//spil_div.style('bottom', '20px');
+	//	spil_div.style('left', cWidth+20+'px');
+	
 	b2.mouseClicked(knap_2);
 	bslet.mouseClicked(slet);
 	bgale.mouseClicked(knap_gale);
