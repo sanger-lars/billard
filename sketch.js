@@ -15,6 +15,8 @@ let antal_spiller_med = AntalDeltagere;
 let er_spillet_igang = false;
 let undo = [];
 let iii;
+let multiNavn = "harren1";
+let multigame = true;
 
 
 
@@ -268,7 +270,7 @@ function knap_OK() {
 		alert("Spillet er slut. "+navn[aktivPlayer].navn+" har vundet retten til at give en omgang.");
 		er_spillet_igang = false;
 	}
-
+	if (multigame) {gem_multi(multiNavn, navn, aktivPlayer);}
 } // knap_OK
 
 
