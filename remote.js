@@ -1,27 +1,18 @@
 
-
-function check_parameter() {
-  let zzz = "";
-  zzz = window.location.search;
-  if (zzz != "") {
-    // vis gem og slet knapper
-	// if (zzz == "?gem")
-  }
-
-} // check_parameter
-
-
-function gem_multi(mulNavn, navn, aktiv) {
+function gem_multi(mulNavn, turNr, navn, aktiv) {
+	var turNrr = turNr.toString();
 	var posting = $.post("bill.php", {
 	  multiNavn: mulNavn,
+	  turNr: turNrr,
 	  aktivSpiller: aktiv,
 	  navn: JSON.stringify(navn) 
 	})
 	.done(function (data) {
-	  alert('OK ?'+data);
+	  
 	})
-	.fail(function () {
-	  alert("failed");
+	.fail(function (err) {
+	  alert("failed "+err);
+	  console.log(err);
 	});
   
 }
