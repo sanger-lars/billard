@@ -51,7 +51,6 @@ class Player {
 	}
 
 	skriv_point() {
-		er_spillet_igang = true; 
 		textSize(font_size);
 		if (this.faerdig == false) {fill(255);}
 		else {fill(100);}
@@ -84,6 +83,9 @@ class Player {
 		alert ("tillykke "+this.navn+". Du er ude af spillet !");
 		this.faerdig = true;
 		antal_spiller_med = antal_spiller_med -1;
+		if (antal_spiller_med == 0) {
+			er_spillet_igang = false;
+		}
 		undo[iii] = -1;
 	}
 
@@ -241,25 +243,27 @@ function tegn_tavleFelter() {
 }
 
 
-function skift_spiller(aktiv) {	
-	if (aktiv >= AntalDeltagere) {
-		aktivPlayer = 1;
-	}
-	else {
-		aktivPlayer = aktivPlayer+1;
-	}
-	while (navn[aktivPlayer].faerdig) {
-		aktivPlayer = aktivPlayer+1;
-		if (aktivPlayer > AntalDeltagere) {
+function skift_spiller(aktiv) {
+	if (er_spillet_igang) {
+		if (aktiv >= AntalDeltagere) {
 			aktivPlayer = 1;
 		}
+		else {
+			aktivPlayer = aktivPlayer+1;
+		}
+		while (navn[aktivPlayer].faerdig) {
+			aktivPlayer = aktivPlayer+1;
+			if (aktivPlayer > AntalDeltagere) {
+				aktivPlayer = 1;
+			}
+		}
 	}
-
 }
 
 
 function knap_OK() {
 	undo = [];
+	er_spillet_igang = (antal_spiller_med > 0); 
 	ap = aktivPlayer;
 	iii = ap;
 	if ((score != 0) && (navn[aktivPlayer].faerdig != true)) {
@@ -282,7 +286,7 @@ function knap_OK() {
 	score = 0;
 	skift_spiller(aktivPlayer);
 	ui_score.html(score + "       "+ navn[aktivPlayer].navn);
-	if (antal_spiller_med == 1) {
+	if (antal_spiller_med == 1 && AntalDeltagere > 1) {
 		alert("Spillet er slut. "+navn[aktivPlayer].navn+" har vundet retten til at give en omgang.");
 		er_spillet_igang = false;
 	}
