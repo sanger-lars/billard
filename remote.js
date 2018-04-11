@@ -69,11 +69,13 @@ function lav_multigame() {
 			
 		bMulti.html("Slet Multigame");
 		multigame = true;
+		ui_Mnavn.html(multiNavn);
 	} else {
 		slet_multigame() 
 		multigame = true;
 		bMulti.html("Start Multigame");
-		multigame = false;	
+		multigame = false;
+		ui_Mnavn.html(" ");
 	}
 }
 

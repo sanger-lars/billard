@@ -21,6 +21,7 @@ function setup() {
 		ui_antal.value(AntalDeltagere);
 		
 		bMulti = createButton("Start Multigame");
+		bMulti.style('margin-right', '120px');
 		bMulti.style('float','right');
 
 		let a = createP(' ');
@@ -28,13 +29,21 @@ function setup() {
 
 		bNyt_spil = createButton("Nyt Spil");
 		bNyt_spil.size(50);
+		bNyt_spil.style('float', 'left');
 		bNyt_spil.parent('menu');
+		
+		ui_Mnavn = createElement('p', " ");
+		ui_Mnavn.style('display','inline-block');
+		ui_Mnavn.style('font-size', '30px');
+		ui_Mnavn.style('margin', '10px');
+		ui_Mnavn.parent('menu');
 
 		bSlet_navne = createButton("Ny Tavle");
 		bSlet_navne.style('float','right');
 		bSlet_navne.style('background','red');
 		bSlet_navne.size(50);
 		bSlet_navne.parent('menu');
+
 
 		ui_score = createElement('H1', " ");
 		ui_score.style('color', 'white');
@@ -46,11 +55,12 @@ function setup() {
 		
 		b2 = createButton("2");
 		b2.size(75);
-		b2.style('font-size', '30px');
+		b2.style('font-size', '40px');
 		b2.parent('spil');
 
 		bOK = createButton("OK");
-		bOK.style('font-size', '30px');
+		bOK.id('OK');
+		bOK.style('font-size', '40px');
 		bOK.parent('spil');
 
 

@@ -149,7 +149,7 @@ function check_for_felter() {
 			navn[1] = (new Player(prompt("indtast navn -> "), del));
 			aktivPlayer = 1;
 			
-			ui_score.html(score + "       "+ navn[aktivPlayer].navn);
+			ui_score.html(score + "&emsp;" + navn[aktivPlayer].navn);
 		} else {
 			navn[i] = new Player(prompt("indtast navn -> "), del*(2*i-1));		
 		}
@@ -285,7 +285,7 @@ function knap_OK() {
 	}
 	score = 0;
 	skift_spiller(aktivPlayer);
-	ui_score.html(score + "       "+ navn[aktivPlayer].navn);
+	ui_score.html(score + "&emsp;" + navn[aktivPlayer].navn);
 	if (antal_spiller_med == 1 && AntalDeltagere > 1) {
 		alert("Spillet er slut. "+navn[aktivPlayer].navn+" har vundet retten til at give en omgang.");
 		er_spillet_igang = false;
@@ -319,25 +319,25 @@ function knap_Undo() {
 		navn[i].skriv_point();
 	}
 	score = 0;
-	ui_score.html(score + "       "+ navn[aktivPlayer].navn);
+	ui_score.html(score + "&emsp;" + navn[aktivPlayer].navn);
 }
 
 
 function knap_2() {
 	score = score+2;
-	ui_score.html(score + "       "+ navn[aktivPlayer].navn);
+	ui_score.html(score + "&emsp;" + navn[aktivPlayer].navn);
 }
 
 
 function knap_gale() {
 	score = -score;
-	ui_score.html(score + "       "+ navn[aktivPlayer].navn);
+	ui_score.html(score + "&emsp;" + navn[aktivPlayer].navn);
 }
 
 
 function slet() {
 	score = 0;
-	ui_score.html(score + "       "+ navn[aktivPlayer].navn);
+	ui_score.html(score + "&emsp;" + navn[aktivPlayer].navn);
 }
 
 
