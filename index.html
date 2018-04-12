@@ -13,7 +13,18 @@
 	<script src="remote.js"></script>
 	<script src="sketch.js"></script>
 	<script src="setup.js"></script>
+	<link rel="icon" href="data:;base64,=">
 	<link rel="stylesheet" href="libraries/bill.css">
+	<script>
+	    var myEvent = window.attachEvent || window.addEventListener;
+	    var chkevent = window.attachEvent ? 'onbeforeunload' : 'beforeunload'; /// make IE7, IE8 compatable
+
+	    myEvent(chkevent, function(e) { // For >=IE7, Chrome, Firefox
+	        var confirmationMessage = ' ';  // a space
+	        (e || window.event).returnValue = confirmationMessage;
+	        return confirmationMessage;
+	    });
+    </script>
 	<style>
 
 	</style>
@@ -21,8 +32,22 @@
 <body id="krop" onscroll="hide_spil()">
 	<div id="min_tavle" ></div>
 	<div id="menu">
-	<input id="tal" type="number" style="font-size: 40px; width: 60px; text-align: center;">
+		<span>
+			<p>Antal spillere</p>
+			<input id="tal" type="number" style="font-size: 40px; width: 60px; text-align: center; margin: 10px; visibility: hidden;">
+		</span>
+		
+		<div id="menu-row2">
+			<button id="nyt">Nyt Spil</button>
+			
+			<div id="Multi">
+				<div id="p-navn" align=center style="font-size: 30px;">Navn</div>
+				<button id="start-multi">Start Multigame</button>
+			</div>
+			<button id="ny-tavle">Ny Tavle</button>
+		</div>
 	</div>
 	<div id="spil" style="position: fixed;"></div>
+
 </body>
 </html>

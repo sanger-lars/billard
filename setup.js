@@ -18,31 +18,31 @@ function setup() {
 		tavle.mouseClicked(check_for_felter);
 
 		ui_antal = select('#tal');
+		ui_antal.style("visibility", "visible");
 		ui_antal.value(AntalDeltagere);
 		
-		bMulti = createButton("Start Multigame");
-		bMulti.style('margin-right', '120px');
-		bMulti.style('float','right');
-
-		let a = createP(' ');
-		a.parent('menu');
-
-		bNyt_spil = createButton("Nyt Spil");
-		bNyt_spil.size(50);
-		bNyt_spil.style('float', 'left');
-		bNyt_spil.parent('menu');
 		
-		ui_Mnavn = createElement('p', " ");
-		ui_Mnavn.style('display','inline-block');
-		ui_Mnavn.style('font-size', '30px');
-		ui_Mnavn.style('margin', '10px');
-		ui_Mnavn.parent('menu');
+		// bMulti.style('margin-right', '120px');
+		// bMulti.style('float','right');
 
-		bSlet_navne = createButton("Ny Tavle");
-		bSlet_navne.style('float','right');
-		bSlet_navne.style('background','red');
-		bSlet_navne.size(50);
-		bSlet_navne.parent('menu');
+		// let a = createP(' ');
+		// a.parent('menu-row2');
+
+		bNyt_spil = select('#nyt');
+		// bNyt_spil.id("nyt");
+		//bNyt_spil.size(50);
+		// bNyt_spil.style('float', 'left');
+		// bNyt_spil.parent('menu-row2');
+		
+
+		ui_Mnavn = select("#p-navn");
+
+
+		bMulti = select("#start-multi");
+	
+
+		bSlet_navne = select("#ny-tavle");
+
 
 
 		ui_score = createElement('H1', " ");

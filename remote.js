@@ -66,7 +66,7 @@ function lav_multigame() {
 		multiNavn = prompt("indtast navn til spillet -> ");
 		
 		slet_multigame(); 
-			
+		debugger;	
 		bMulti.html("Slet Multigame");
 		multigame = true;
 		ui_Mnavn.html(multiNavn);

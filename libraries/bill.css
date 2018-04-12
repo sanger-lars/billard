@@ -20,7 +20,7 @@ button {
 }
 
 
-h1 {
+#spil h1 {
 	padding-left: 20px;
 	padding-bottom: 0px;
 	margin-bottom: 0;
@@ -30,6 +30,54 @@ h1 {
 #menu {
 	padding-top: 100px;
 }
+
+#menu span p {
+	font-size: 20px;
+	margin: 0 10px;
+	padding-bottom: 0;
+}
+
+#menu-row2 {
+	display: flex;
+	justify-content: space-between;
+}
+
+#nyt {
+	font-size: 20px;
+	width: 60px;
+	height: 60px;
+	
+	order: 1;
+}
+
+#ny-tavle {
+	font-size: 20px;
+	width: 60px;
+	height: 60px;
+	background-color: red;
+
+	order: 3
+}
+
+#Multi {
+	padding: 0 20px;
+	flex: 1;
+	order: 2;
+	display: flex;
+	flex-direction: column;
+	width: 100px;
+	
+}
+
+#p-navn {
+	flex: 1;
+}
+
+#start-multi {
+	flex: 1;
+}
+
+
 
 #spil {
 	width: 241px;

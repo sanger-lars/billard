@@ -1,5 +1,5 @@
 let b2, bslet, bgale, bOK, bSlet_navne, bNyt_spil, bUndo;
-let ui_score, ui_tur, ui_antal, bNyt_navn, bMulti, bUpd;
+let ui_score, ui_tur, ui_antal, bNyt_navn, bMulti, bUpd, div_navn;
 let tavle;
 let cWidth =  window.innerWidth; // window.screen.width; //640px
 let cHeight = 1000;
@@ -343,11 +343,11 @@ function slet() {
 
 function hide_spil() {
 	var elmnt = document.getElementById("spil");
-	console.log("lars="+window.scrollY);
-	if (window.scrollY >360) {
+	if (window.scrollY > 400) {
 		elmnt.style.display = "none";
 	} else {
 		elmnt.style.display = "block";
 	}
 	
 }
+
