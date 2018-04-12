@@ -15,6 +15,7 @@ let antal_spiller_med = AntalDeltagere;
 let er_spillet_igang = false;
 let undo = [];
 let iii, turNr;
+let overskrift;
 
 
 function check_parameter() {
@@ -43,11 +44,11 @@ class Player {
 	}
 	
 	skriv_navn() {
-		textSize(font_size+sizePlus);
-		if (this.faerdig == false) {fill(255);}
-		else {fill(100);}
-		stroke(0);
-		text(this.navn, this.startCol-(textWidth(this.navn)/2), topSpace*0.70);
+		overskrift.textSize(font_size+sizePlus);
+		if (this.faerdig == false) {overskrift.fill(255);}
+		else {overskrift.fill(100);}
+		overskrift.stroke(0);
+		overskrift.text(this.navn, this.startCol-(overskrift.textWidth(this.navn)/2), topSpace*0.70);
 	}
 
 	skriv_point() {
@@ -235,11 +236,15 @@ function tegn_tavleFelter() {
 	background(0);
 	stroke(255);
 	strokeWeight(4);
+	overskrift.background(0);
+	overskrift.stroke(255);
+	overskrift.strokeWeight(4);
 	let del = cWidth / AntalDeltagere;
 	for (var i = 1; i < AntalDeltagere; i++) {
+		overskrift.line(del*i, 5, del*i, topSpace+2);
 		line(del*i, 5, del*i, cHeight-5);
 	}
-	line(5, topSpace, cWidth-5, topSpace);
+	overskrift.line(5, topSpace, cWidth-5, topSpace);
 }
 
 

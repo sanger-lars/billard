@@ -2,20 +2,26 @@ function setup() {
 	tavle = createCanvas(cWidth, cHeight);
 	tavle.style("visibility", "visible");
 	tavle.parent('min_tavle');
-
+	overskrift = createGraphics(cWidth, topSpace+2);
+	overskrift.show();
+	overskrift.elt.id = 'overskrift'; 
+	overskrift.mouseClicked(check_for_felter);
 	if (multiNavn != "") {
 		hent_multi(); 
 
 		score = 0;
 			//ui_score.html(score + "       "+ navn[aktivPlayer].navn);
 
-		bUpd = createButton("Update");
+		bUpd = createButton('Update "'+multiNavn+'"');
 		bUpd.style('width', '221px');
 		bUpd.style('font-size', '20px');
 		bUpd.parent('spil');
 		bUpd.mouseClicked(hent_multi);
+		var menu = select('#menu');
+		menu.style("visibility", "hidden");
+		
 	} else {
-		tavle.mouseClicked(check_for_felter);
+		//tavle.mouseClicked(check_for_felter);
 
 		ui_antal = select('#tal');
 		ui_antal.style("visibility", "visible");

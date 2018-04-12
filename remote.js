@@ -94,11 +94,11 @@ function tilpas_skaerm() {
 
 
 function skriv_navn(nav) {
-	textSize(font_size+sizePlus);
-	if (nav.faerdig == false) {fill(255);}
-	else {fill(100);}
-	stroke(0);
-	text(nav.navn, nav.startCol-(textWidth(nav.navn)/2), topSpace*0.70);
+	overskrift.textSize(font_size+sizePlus);
+	if (nav.faerdig == false) {overskrift.fill(255);}
+	else {overskrift.fill(100);}
+	overskrift.stroke(0);
+	overskrift.text(nav.navn, nav.startCol-(overskrift.textWidth(nav.navn)/2), topSpace*0.70);
 }
 
 
