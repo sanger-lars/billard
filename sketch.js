@@ -112,21 +112,15 @@ class Player {
 				// ikke kryds
 				pp = this.sidste_score()-scor;
 				if (pp <= 0) { // har score passeret nul ?
-					// check for flere end 2 spillere
-					if (antal_spiller_med == 2) {
-						if (confirm(this.navn+" Du står på nul. Er du færdig ? (Annuller=X)")) {
-							this.vinder();
-						}
-						else {
-							pp = 0;
-							this.score.push("X");
-							this.kryds = true;
-							undo[iii] = 2;
-						}
-					} 
-					else {
+					if (confirm(this.navn+" Du står på nul. Er du færdig ? (Annuller=X)")) {
 						this.vinder();
 					}
+					else {
+						pp = 0;
+						this.score.push("X");
+						this.kryds = true;
+						undo[iii] = 2;
+					}	
 				} 
 				else {
 					this.score.push(pp);
