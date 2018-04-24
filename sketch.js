@@ -297,33 +297,34 @@ function knap_OK() {
 
 
 function knap_Undo() {
-	console.log(undo);
-	if (!er_spillet_igang) {er_spillet_igang = true;}
-	for (iii = 1; iii < undo.length; iii++) {
-		if (undo[iii] == 1) {navn[iii].score.pop();}
-		else if (undo[iii] == -1) {
-			navn[iii].faerdig = false;
-			antal_spiller_med = antal_spiller_med + 1;
+	if (confirm("Bekræft fortryd ?")) {
+		if (!er_spillet_igang) {er_spillet_igang = true;}
+		for (iii = 1; iii < undo.length; iii++) {
+			if (undo[iii] == 1) {navn[iii].score.pop();}
+			else if (undo[iii] == -1) {
+				navn[iii].faerdig = false;
+				antal_spiller_med = antal_spiller_med + 1;
+			}
+			else if (undo[iii] == 2) {
+				navn[iii].kryds = false;
+				navn[iii].score.pop();
+			}
 		}
-		else if (undo[iii] == 2) {
-			navn[iii].kryds = false;
-			navn[iii].score.pop();
+		aktivPlayer = ap;
+
+		if (multigame) {
+			turNr = turNr + 1;
+			gem_multi(multiNavn, turNr, navn, aktivPlayer);
 		}
-	}
-	aktivPlayer = ap;
 
-	if (multigame) {
-		turNr = turNr + 1;
-		gem_multi(multiNavn, turNr, navn, aktivPlayer);
+		tegn_tavleFelter();
+		for (i = 1; i <= AntalDeltagere; i++) {
+			navn[i].skriv_navn();
+			navn[i].skriv_point();
+		}
+		score = 0;
+		ui_score.html(score + "&emsp;" + navn[aktivPlayer].navn);
 	}
-
-	tegn_tavleFelter();
-	for (i = 1; i <= AntalDeltagere; i++) {
-		navn[i].skriv_navn();
-		navn[i].skriv_point();
-	}
-	score = 0;
-	ui_score.html(score + "&emsp;" + navn[aktivPlayer].navn);
 }
 
 
