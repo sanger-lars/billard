@@ -112,16 +112,19 @@ class Player {
 				// ikke kryds
 				pp = this.sidste_score()-scor;
 				if (pp <= 0) { // har score passeret nul ?
-					if (confirm(this.navn+" Du står på nul. Er du færdig ? (Annuller=X)")) {
-						this.vinder();
+					if (antal_spiller_med == 2) {
+						if (confirm(this.navn+" Du står på nul. Er du færdig ? (Annuller=X)")) {
+							this.vinder();
+						}
+						else {
+							pp = 0;
+							this.score.push("X");
+							this.kryds = true;
+							undo[iii] = 2;
+						}
 					}
-					else {
-						pp = 0;
-						this.score.push("X");
-						this.kryds = true;
-						undo[iii] = 2;
-					}	
-				} 
+					else this.vinder();
+				}
 				else {
 					this.score.push(pp);
 					undo[iii] = 1;
@@ -129,7 +132,7 @@ class Player {
 				}
 			}	
 		}}
-	}
+	} // lav_score(scor)
 
 } // class Player
 
@@ -141,12 +144,17 @@ function check_for_felter() {
 	if (mouseY <= topSpace) {
 		// navne felter
 		if (i == 1) {
-			navn[1] = (new Player(prompt("indtast navn -> "), del));
+			if (!navn[1]) {
+				navn[1] = (new Player(prompt("indtast navn -> "), del));
+				
+			} else navn[i].navn = prompt("indtast nyt navn -> ");
 			aktivPlayer = 1;
-			
 			ui_score.html(score + "&emsp;" + navn[aktivPlayer].navn);
 		} else {
-			navn[i] = new Player(prompt("indtast navn -> "), del*(2*i-1));		
+			if (!navn[i]) {
+				navn[i] = new Player(prompt("indtast navn -> "), del*(2*i-1));		
+			} else navn[i].navn = prompt("indtast nyt navn -> ");
+			if (er_spillet_igang) ui_score.html(score + "&emsp;" + navn[aktivPlayer].navn);	
 		}
 		tegn_tavleFelter();
 		for (i = 1; i <= AntalDeltagere; i++) {
@@ -156,7 +164,7 @@ function check_for_felter() {
 			}
 		}
 	}
-}
+} // check_for_felter()
 
 
 function slet_navne() {
@@ -202,7 +210,7 @@ function edit_tabel(minus) {
 		}
 	}
  	antal_spiller_med = AntalDeltagere;
-}
+} // edit_tabel(minus)
 
 
 function slet_sidste_spiller(antal_spillere) {
@@ -325,7 +333,7 @@ function knap_Undo() {
 		score = 0;
 		ui_score.html(score + "&emsp;" + navn[aktivPlayer].navn);
 	}
-}
+} // knap_Undo()
 
 
 function knap_2() {
