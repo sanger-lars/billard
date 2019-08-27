@@ -10,7 +10,6 @@ function setup() {
 		hent_multi(); 
 
 		score = 0;
-			//ui_score.html(score + "       "+ navn[aktivPlayer].navn);
 
 		bUpd = createButton('Update "'+multiNavn+'"');
 		bUpd.style('width', '221px');
@@ -21,35 +20,18 @@ function setup() {
 		menu.style("visibility", "hidden");
 		
 	} else {
-		//tavle.mouseClicked(check_for_felter);
 
 		ui_antal = select('#tal');
 		ui_antal.style("visibility", "visible");
 		ui_antal.value(AntalDeltagere);
 		
-		
-		// bMulti.style('margin-right', '120px');
-		// bMulti.style('float','right');
-
-		// let a = createP(' ');
-		// a.parent('menu-row2');
-
 		bNyt_spil = select('#nyt');
-		// bNyt_spil.id("nyt");
-		//bNyt_spil.size(50);
-		// bNyt_spil.style('float', 'left');
-		// bNyt_spil.parent('menu-row2');
-		
 
 		ui_Mnavn = select("#p-navn");
 
-
 		bMulti = select("#start-multi");
 	
-
 		bSlet_navne = select("#ny-tavle");
-
-
 
 		ui_score = createElement('H1', " ");
 		ui_score.style('color', 'white');
@@ -87,9 +69,6 @@ function setup() {
 		bUndo.style('background','red');
 		bUndo.parent('spil');
 		let spil_div = select('#spil');
-		//spil_div.style('left', '20px');
-		//spil_div.style('bottom', '20px');
-		//	spil_div.style('left', cWidth+20+'px');
 		
 		b2.mouseClicked(knap_2);
 		bslet.mouseClicked(slet);
@@ -103,7 +82,6 @@ function setup() {
 		
 		turNr = 0;
 		navn = [];
-		// antal_spiller_med = AntalDeltagere;
 		tegn_tavleFelter();		
 	}
 } // Setup

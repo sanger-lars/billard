@@ -1,4 +1,6 @@
 <?php
+require_once('../sne/Lars.php');
+
 if(isset($_POST['slet'])){
     slet($_POST['slet'], $_POST['multiNavn']);
 }
@@ -13,16 +15,6 @@ if(isset($_POST['navn'])){
     gem_tal($_POST['multiNavn'], $_POST['turNr'], $_POST['aktivSpiller'], $_POST['navn']);
 }
 
-
-function connectToDB() {
-	$mysqli = new mysqli("lars-f.dk.mysql", "lars_f_dk", "t9di8hatcB3gt9VkrYj5S8xZ", "lars_f_dk");
-	if ($mysqli->connect_errno) {
-    	echo "Failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
-    	exit();
-	}
-
-	return $mysqli;
-}
 
 function gem_tal($mulNavn, $turNr, $aktiv, $navn) {
     $mysqli = connectToDB();
